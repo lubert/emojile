@@ -21,7 +21,7 @@ def oauth(code, redirect_uri):
     if not data['ok']:
         return
 
-    return data['access_token']
+    return (data['team_name'], data['access_token'])
 
 def webauth(email, password, team):
     """Returns cookies through web authentication

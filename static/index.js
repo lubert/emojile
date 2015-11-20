@@ -25,7 +25,6 @@ $(function() {
     $password.attr('disabled', true);
     
     $authorize.click(function() {
-
       window.location = 'https://slack.com/oauth/authorize?client_id=14778368613.14886150994&scope=emoji:read&redirect_uri=' + redirect_uri;
     });
   }
