@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from settings import *
 from auth import webauth, oauth
-from emojis import get_emojis
+from emojis import get_emojis, post_emojis
 
 app = Flask(__name__)
 app.debug = DEBUG
@@ -20,12 +20,15 @@ def magic():
 
     team_name, access_token = oauth(code, redirect_uri)
     cookies = webauth(email, password, team)
+    cookie = 'a-' + cookies['a'] + '=' + cookies['a-' + cookies['a']]
     
     app.logger.info('access_token: %s' % access_token)
     app.logger.info('team_name: %s' % team_name)
     app.logger.info('cookies: %s' % cookies)
+    app.logger.info('cookie: %s' % cookie)
 
     get_emojis(team_name, access_token)
+    post_emojis(team_name, cookie)
 
     return jsonify({'status': 'ok'})
 
