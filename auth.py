@@ -52,7 +52,7 @@ def webauth(email, password, team):
     data = 'signin=1&crumb={0}&email={1}&password={2}'.format(crumb, email, password)
     res = s.post('https://%s.slack.com/' % team, data=data, allow_redirects=False)
 
-    if 'a' not in res.cookies:
+    if 'a' not in res.cookies.keys():
         return
 
     return res.cookies.get_dict()
